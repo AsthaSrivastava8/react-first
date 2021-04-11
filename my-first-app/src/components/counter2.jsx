@@ -17,7 +17,12 @@ class Counter2 extends Component {
   }
 
   render() {
-    return <div>{this.renderTags()}</div>;
+    return (
+      <div>
+        {this.state.tags.length === 0 && "Please add tags!"}
+        {this.renderTags()}
+      </div>
+    );
   }
 }
 
