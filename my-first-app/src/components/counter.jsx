@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
+    value: this.props.value,
     address: {
       street: "Baker Street",
       apartment: "221B",
@@ -16,33 +16,52 @@ class Counter extends Component {
     fontWeight: "bold",
   };
 
+  // bind event handler
+  // constructor() {
+  //   super(); // for parent class Component
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+
+  handleIncrement = (product, product2) => {
+    console.log(product);
+    console.log(product2);
+    this.setState({ value: this.state.value + 1 });
+  };
+
   render() {
+    console.log(this.props);
     return (
       <div>
         {/* <img src={this.state.imageURL} alt="Not available" /> */}
-        {/* <span style={this.styles} className={this.getBadgeClasses()}> */}
-          {/* {this.formatCount()} */}
-        {/* </span> */}
-        {/* <button className="btn btn-secondary btn-sm">Increment</button> */}
-        <ul>
+        <span style={this.styles} className={this.getBadgeClasses()}>
+          {this.formatCount()}
+        </span>
+
+        <button
+          onClick={() => this.handleIncrement(this.state, this.state)}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        {/* <ul>
           {this.state.tags.map((tag) => (
             <li key={tag}>{tag}</li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     );
   }
 
-  // getBadgeClasses() {
-  //   let classes = "badge m-2 badge-";
-  //   classes += this.state.count === 0 ? "warning" : "primary";
-  //   return classes;
-  // }
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.value === 0 ? "warning" : "primary";
+    return classes;
+  }
 
-  // formatCount() {
-  //   const { count } = this.state;
-  //   return count === 0 ? "Zero" : count;
-  // }
+  formatCount() {
+    const { value: count } = this.state;
+    return count === 0 ? "Zero" : count;
+  }
 }
 
 export default Counter;
